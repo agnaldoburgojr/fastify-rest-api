@@ -5,6 +5,10 @@ import { z } from 'zod'
 import { checkSessionIdExists } from '../middleware/check-session-id-exists'
 
 export async function transactionsRoutes(app: FastifyInstance) {
+  app.addHook('preHandler', async () => {
+    console.log('preHandler global hook in transactionsRoutes')
+  })
+
   app.get(
     '/',
     { preHandler: [checkSessionIdExists] },
